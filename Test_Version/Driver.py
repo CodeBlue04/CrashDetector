@@ -72,7 +72,7 @@ def sensorEmergency(data):
     #     # com.sendMessage(output)
     #     return True
 
-
+#TODO Getting weird index out of bounds error for speed, comment out speed and assume that temp is out of sequence. Testing in progress.
     gXMax = data[0]
     gYMax = data[1]
     gZMax= data[2]
