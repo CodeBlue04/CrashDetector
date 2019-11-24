@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 # editor and use the "find and replace" function to replace every descriptor string with ''
 
 
-filepath = "TestData.txt"
+filepath = "C:\\Users\\colby\\Documents\\rPi project\\TestData\\OffroadTestData.txt"
 
 #Open test data text file and count the lines, not required, but useful
 with open(filepath) as f:
@@ -34,12 +34,12 @@ with open(filepath) as fp:
     for line in fp:
         token = line.replace(' ', '')
         testdata = token.split(',')
-        XGarr.append(abs(round(float(testdata[0]), 2)))
-        YGarr.append(abs(round(float(testdata[1]), 2)))
-        ZGarr.append(abs(round(float(testdata[2]), 2) + 1)) #to counter default -1 for regular gravity
-        GyroXarr.append(abs(round(float(testdata[3]), 2)))
-        GyroYarr.append(abs(round(float(testdata[4]), 2)))
-        GyroZarr.append(abs(round(float(testdata[5]), 2)))
+        XGarr.append(round(float(testdata[0]), 2))
+        YGarr.append(round(float(testdata[1]), 2))
+        ZGarr.append(round(float(testdata[2]), 2)) #to counter default -1 for regular gravity
+        GyroXarr.append(round(float(testdata[3]), 2))
+        GyroYarr.append(round(float(testdata[4]), 2))
+        GyroZarr.append(round(float(testdata[5]), 2))
         latarr.append(testdata[6])
         lonarr.append(testdata[7])
         timearr.append(testdata[8])
@@ -49,11 +49,11 @@ with open(filepath) as fp:
 #Fill in parameters until you have a small dataset showing outlying values, then adjust sensor code to these parameters
 # in order to refine what your non-crash riding "looks like"
 for i in range(count):
-    if (abs(XGarr[i]) > 1):
+    if (abs(XGarr[i]) > 2):
         XGOvern += 1
-    if (abs(YGarr[i]) > .75):
+    if (abs(YGarr[i]) > 1):
         YGOvern += 1
-    if (abs(ZGarr[i]) > 1.8):
+    if (abs(ZGarr[i]) > 2):
         ZGOvern += 1
 
 print("XG Over n = " + str(XGOvern))
@@ -103,5 +103,4 @@ axs[2, 0].set(xlabel='Frequency', ylabel='Accel/Decel Degree Change')
 axs[2, 1].hist(GyroZarr, bins=50)
 axs[2, 1].set_title('Z Gyro')
 axs[2, 1].set(xlabel='Frequency', ylabel='Vertical Degree Change')
-
 plt.show()
