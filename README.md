@@ -10,7 +10,7 @@ In its current form the sensor array works and formats the message properly for 
 Beyond the code, I've also put up .stl files of the case I designed using Autodesk Fusion 360. These are a work in progess, but the version here is perfectly fine. I'm just making minor tweaks at this point. The primary goal of the case is obviously to house the hardware, but the next highest priority is to keep the case as small as is feasible to accommodate being mounted to a wider array of vehicles. Sportbikes, for instance, have notoriously small cargo compartments (if any) and present a series of challenges. Right now I'm able to fit this iteration into the glove box of my KTM 990 Adventure along with a battery pack to run the device. 
 
 ### Present Challenge:
-At present, I've connected the RockBlock 9603 and am doing battle with I2C getting it set up for a full test run. That is the challenge I'm working through at the moment, but as soon as that's complete the client device and server will be fully functional.
+At present, I've connected the RockBlock 9603 and am doing battle with I2C getting it set up for a full test run. That is the challenge I'm working through at the moment, but as soon as that's complete the client device and server will both be fully functional. In the past this would have been where I stopped, but I enjoy working on this project too much to stop adding features and functionality.
 
 ### Future Plans:
 The next step after testing the RockBlock is going to be an Android application which will provide messenger functionality through the satellite network.
