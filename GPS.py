@@ -25,10 +25,6 @@ class GPS(object):
         #- Accurate time
         self.time = 0
 
-    #This was useful in an earlier iteration and doesn't cost much to retain, so I'd like to keep it
-    def GPSListener(self):
-        self.setValues(self)
-
     #- Setter. Collects data from the receiver, formats it, and updates the GPS object fields
     def setValues(self):
         print("To GPS")

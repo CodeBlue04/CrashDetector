@@ -2,9 +2,7 @@ import datetime
 import math
 from ctypes import c_short
 from time import sleep
-
 from smbus import SMBus
-
 import IMU
 import SensorArray
 
@@ -32,15 +30,15 @@ class IMUSensors:
 
     bus = SMBus(1)  # 0 for R-Pi Rev. 1, 1 for Rev. 2
 
-    # return two bytes from data as a signed 16-bit value
+    # Returns two bytes from data as a signed 16-bit value
     def get_short(self, data, index):
         return c_short((data[index] << 8) + data[index + 1]).value
 
-    # return two bytes from data as an unsigned 16-bit value
+    # Returns two bytes from data as an unsigned 16-bit value
     def get_ushort(self, data, index):
         return (data[index] << 8) + data[index + 1]
 
-    # calls SensorArray class and passes array of sensor data if crash or fire detected in undateValues()
+    # Calls SensorArray class and passes array of sensor data if crash or fire detected in undateValues()
     def sensorCaller(self, dataArray):
         sense = SensorArray.SensorArray()
         sense.alertDriver(dataArray)
