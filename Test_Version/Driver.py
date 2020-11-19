@@ -5,7 +5,7 @@ import logging
 
 # -------------SatCom constants------------------
 # - need port number for communicator
-portID = 0
+portID = "/dev/serial0"
 # - need callback number for communicator
 callback = 0
 
@@ -19,27 +19,11 @@ global maxGyroZ
 global maxTemp
 logging.basicConfig(filename='CrashData.log', level=logging.DEBUG)
 
-#server_sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
-# - need to set up one listener for driver to check for bluetooth message
-# - Contact info must be stored on email server. Message logging not necessary
-# - on device, since server does all of the back end work with who to send to.
-# - Provide ID from mobile app, or SOS code from device button
-# Use logging library to log how many messages are sent/received, log every 5 minute location data in csv file
-# look into how much data is used for data tracking
-
-port = "/dev/ttyAMA0"
+portID = "/dev/serial0"
 callback = 0
-#server_sock.bind(("", port))
-#server_sock.listen(1)
-
-#client_sock, address = server_sock.accept()
-#print("Accepted connection from ", address)
-
-#data = client_sock.recv(1024)
-#print("received [%s]" % data)
 
 # -------- Satellite Communicator object----------
-com = rockBlock.__init__(portID, callback)
+#com = rockBlock.__init__(portID, callback)
 
 # ------function to send data from SensorArray to formatted string, then to the SatCom unit-------
 def sensorEmergency(data):
@@ -54,8 +38,8 @@ def sensorEmergency(data):
                  " Lon: " + str(data[8]) + " Speed: " + str(data[10])
         print(output)
         logging.info(output)
-        com.sendMessage(output)
-        exit(0)
+        #com.sendMessage(output)
+        return driverMonitor()
 
     # - Message for a crash without fire
     if (abs(data[0]) > 1 or abs(data[1]) > 1.5 or abs(data[2]) > 3 or abs(data[3]) > 181 or abs(data[4]) > 181 or \
@@ -65,42 +49,17 @@ def sensorEmergency(data):
                  " Lon: " + str(data[8]) + " Speed: " + str(data[10]) + " Temp: " + str(data[6])
         print(output)
         logging.info(output)
-        com.sendMessage(output)
+        #com.sendMessage(output)
         # - Message for fire alone
-        exit(0)
+        return driverMonitor()
 
     # - Message for fire
     elif float(data[6]) > 70:
         output = "AutoMsg: Fire! Time: " + +  data[9] + " Lat: " + str(data[7]) + " Lon: " + str(data[8])
         print(output)
         logging.info(output)
-        com.sendMessage(output)
-        return True
-    #
-    # #TODO Getting weird index out of bounds error for speed, comment out speed and assume that temp is out of sequence. Testing in progress.
-    # gXMax = data[0]
-    # gYMax = data[1]
-    # gZMax= data[2]
-    # temperature= data[3]
-    # gyroXMax= data[4]
-    # gyroYMax= data[5]
-    # gyroZMax= data[6]
-    # lat= data[7]
-    # lon= data[8]
-    # alt= data[9]
-    # time= data[10]
-    # speed= data[11]
-    #
-    # output = "maxXG: " + str(gXMax) + " maxYG: " + str(gYMax) + " maxZG: " + str(
-    #     gZMax) + " Temp: " + str(temperature) + "Gyro X" \
-    # + str(gyroXMax) + " Gyro Y: " + str(gyroYMax) + "Gyro Z: " + str(
-    #     gyroZMax) + " Lat: " \
-    # + str(lat) + " Lon: " + str(lon) + " Alt: " + str(alt) + " Time: " + \
-    # str(time) + " Speed: " + str(speed)
-    # with open("/home/pi/Documents/output.txt", "a") as myFile:
-    #     myFile.write(str(output))
-    #     myFile.write("\n")
-
+        #com.sendMessage(output)
+        return driverMonitor()
 
 #--------------------Driver script--------------------------
 def driverMonitor():

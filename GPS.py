@@ -27,7 +27,6 @@ class GPS(object):
 
     #- Setter. Collects data from the receiver, formats it, and updates the GPS object fields
     def setValues(self):
-        print("To GPS")
         for new_data in self.gps_socket:
             if new_data:
                 self.data_stream.unpack(new_data)

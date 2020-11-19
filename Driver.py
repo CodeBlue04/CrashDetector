@@ -17,33 +17,30 @@ com = rockBlock.__init__(portID, callback)
 # ------Function to send data from SensorArray to formatted string, then to the SatCom unit-------
 def sensorEmergency(data):
     #- Message for crash with fire
-    if data[0] > 1 or data[1] > 1.5 or data[2] > 3 and data[6] > 80:
+    if data[0] > 1 or data[1] > 1.5 or data[2] > 3 and data[6] >= 80:
         output = "Crash+Fire! Time:" + data[9] + " gX:" + "%.1f" % data[0] + " gY:" + \
                  "%.1f" % data[1] + " gZ:" + "%.1f" % data[2] + " Lat:" + "%.4f" % data[7] + \
                  " Lon:" + "%.4f" % data[8] + " Speed:" + "%.0f" % data[10]
-        #print(output)
         logging.info(output)
         com.sendMessage(output)
-        return True
+        driverMonitor()
 
     # - Message for a crash without fire
-    if data[0] > 1 or data[1] > 1.5 or data[2] > 3 and data[6] < 80:
+    elif data[0] > 1 or data[1] > 1.5 or data[2] > 3 and data[6] < 80:
         output = "Crash! Time:" + data[9] + " gX:" + "%.1f" % data[0] + " gY:" + \
                  "%.1f" % data[1] + " gZ:" + "%.1f" % data[2] + " Lat:" + "%.4f" % data[7] + \
                  " Lon:" + "%.4f" % data[8] + " Speed:" + "%.0f" % data[10]
-        #print(output)
         logging.info(output)
         com.sendMessage(output)
-        return True
+        return driverMonitor()
 
     # - Message for fire
     elif data[6] > 80:
         output = "Fire! Time: " + +  data[9] + " Lat:" + "%.4f" % data[7] + " Lon:" + "%.4f"\
                  % data[8]
-        #print(output)
         logging.info(output)
         com.sendMessage(output)
-        return True
+        return driverMonitor()
 
 
 #--------------------Driver script--------------------------
