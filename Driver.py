@@ -4,7 +4,7 @@ import logging
 
 # -------------SatCom constants------------------
 # - Port number for communicator
-portID = "/dev/ttyUSB0"
+portID = "/dev/serial0"
 # - Callback number for communicator
 callback = 0
 
