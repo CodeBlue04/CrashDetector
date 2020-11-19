@@ -111,7 +111,7 @@ class IMUSensors:
         temperature = t / 10.0
 
         #-------------------Crash condition checker-----------------------
-        if abs(xG) > 1 or abs(yG) > .75 or abs(zG+1) > 1.8:
+        if temperature > 80 or abs(xG) > 4 or abs(yG) > 2.25 or abs(zG+1) > 2.5:
             print("Xg = " + str(abs(xG)) + " yG = " + str(abs(yG)) + " zG = " + str(abs(zG+1)))
             #- creates list of data to send up to the SensorArray class
             sensorData = [xG, yG, zG, self.gyroXangle, self.gyroYangle, self.gyroZangle, str(temperature)]
