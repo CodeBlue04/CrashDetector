@@ -39,10 +39,10 @@ def sensorEmergency(data):
         print(output)
         logging.info(output)
         #com.sendMessage(output)
-        return driverMonitor()
+
 
     # - Message for a crash without fire
-    if (abs(data[0]) > 1 or abs(data[1]) > 1.5 or abs(data[2]) > 3 or abs(data[3]) > 181 or abs(data[4]) > 181 or \
+    elif (abs(data[0]) > 1 or abs(data[1]) > 1.5 or abs(data[2]) > 3 or abs(data[3]) > 181 or abs(data[4]) > 181 or \
         abs(data[5])) and float(data[6]) < 70:
         output = "AutoMsg: Crash! Time: " + data[9] + " gX: " + "%.1f" % data[0] + " gY: " + \
                  "%.1f" % data[1] + " gZ: " + "%.1f" % data[2] + " Lat: " + str(data[7]) + \
@@ -51,7 +51,7 @@ def sensorEmergency(data):
         logging.info(output)
         #com.sendMessage(output)
         # - Message for fire alone
-        return driverMonitor()
+
 
     # - Message for fire
     elif float(data[6]) > 70:
@@ -59,7 +59,8 @@ def sensorEmergency(data):
         print(output)
         logging.info(output)
         #com.sendMessage(output)
-        return driverMonitor()
+
+    driverMonitor()
 
 #--------------------Driver script--------------------------
 def driverMonitor():

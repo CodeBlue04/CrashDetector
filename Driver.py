@@ -23,7 +23,6 @@ def sensorEmergency(data):
                  " Lon:" + "%.4f" % data[8] + " Speed:" + "%.0f" % data[10]
         logging.info(output)
         com.sendMessage(output)
-        driverMonitor()
 
     # - Message for a crash without fire
     elif data[0] > 1 or data[1] > 1.5 or data[2] > 3 and data[6] < 80:
@@ -32,7 +31,6 @@ def sensorEmergency(data):
                  " Lon:" + "%.4f" % data[8] + " Speed:" + "%.0f" % data[10]
         logging.info(output)
         com.sendMessage(output)
-        return driverMonitor()
 
     # - Message for fire
     elif data[6] > 80:
@@ -40,7 +38,8 @@ def sensorEmergency(data):
                  % data[8]
         logging.info(output)
         com.sendMessage(output)
-        return driverMonitor()
+
+    driverMonitor()
 
 
 #--------------------Driver script--------------------------
